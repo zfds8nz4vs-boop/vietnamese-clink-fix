@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf Lexicons release
+          mkdir -p Lexicons release && rm -f Lexicons/vi.clex Lexicons/vi.cngm Lexicons/vi.cime
           python3 build-pack.py vi source/vi_50k.txt
           python3 tools/build-next-word.py vi source/vi_50k.txt source/vie_sentences.tsv
           python3 tools/build-telex-cime.py vi source/vi_50k.txt
@@ -38,7 +38,7 @@ jobs:
           python3 tools/validate-pack.py vi
       - name: Build release manifest
         run: |
-          python3 tools/build-release-manifest.py v1.0.0 zfds8nz4vs-boop/vietnamese-clink-fix release
+          python3 tools/build-release-manifest.py v1.0.1 zfds8nz4vs-boop/vietnamese-clink-fix release
           cp README.md NOTICE.md LICENSE.md RELEASE-NOTES.md release/
           cp release/manifest.json release/assets/manifest.json
       - name: Publish first release
@@ -47,4 +47,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh release create v1.0.0 release/assets/* release/README.md release/NOTICE.md release/LICENSE.md release/RELEASE-NOTES.md             --repo zfds8nz4vs-boop/vietnamese-clink-fix             --title "Vietnamese Clink Fix v1.0.0"             --notes-file RELEASE-NOTES.md
+          gh release create v1.0.1 release/assets/* release/README.md release/NOTICE.md release/LICENSE.md release/RELEASE-NOTES.md             --repo zfds8nz4vs-boop/vietnamese-clink-fix             --title "Vietnamese Clink Fix v1.0.1"             --notes-file RELEASE-NOTES.md
