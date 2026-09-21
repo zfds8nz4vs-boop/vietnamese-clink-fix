@@ -40,8 +40,10 @@ def tone_pos(chars,old=False):
     marked=[i for i in vs if vowel_label(chars[i]) in "ăâêôơư"]
     if marked:return marked[-1] if len(marked)>1 else marked[0]
     labels=[vowel_label(chars[i]) for i in vs]
+    if old:
+        if vs[-1] < len(chars)-1: return vs[-1]
+        return vs[-2] if len(vs)>1 else vs[0]
     if len(labels)>=2 and "".join(labels[-2:]) in ("oa","oe","uy"): return vs[-1]
-    if old and vs[-1] < len(chars)-1:return vs[-1]
     return vs[-2] if len(vs)>1 else vs[0]
 def reading(word,old=False):
     out=[]; buf=[]
