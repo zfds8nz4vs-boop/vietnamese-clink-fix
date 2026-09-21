@@ -9,6 +9,10 @@
       "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/vi/vi_50k.txt",
       "https://downloads.tatoeba.org/exports/per_language/vie/vie_sentences.tsv.bz2"
     ],
+    "sha256":{
+      "wordlist":"3f5b112e4324136c2ba82d3151038607e3dd1dfa0911c226929d7544cc11adf3",
+      "sentences":"4f6c74788f26910851feb03593acaa5a1cded1672a382ce1b9be779aca31241d"
+    },
     "notes":"Vietnamese Telex/CIME rules are original project data based on established UniKey/Telex user conventions; the UniKey engine/source is not redistributed here."}
   ],
   "imes": []
