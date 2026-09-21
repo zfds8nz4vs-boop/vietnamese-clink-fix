@@ -1,0 +1,27 @@
+# Small checked-in Vietnamese Telex regression corpus.
+áo
+áu
+tiếng
+Việt
+đường
+người
+hòa
+hoà
+khỏe
+huỷ
+hủy
+quý
+quả
+của
+mía
+ngoáy
+thoải
+quyết
+bài
+bảy
+chiều
+chuối
+mười
+nước
+biển
+quyền

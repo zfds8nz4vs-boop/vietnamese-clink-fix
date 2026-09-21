@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "attribution": [
+    {"name":"FrequencyWords / OpenSubtitles 2018","license":"CC-BY-SA-4.0","url":"https://github.com/hermitdave/FrequencyWords"},
+    {"name":"Tatoeba sentence exports","license":"CC-BY-2.0-FR","url":"https://tatoeba.org/en/downloads"}
+  ],
+  "packs": [
+    {"code":"vi","status":"complete","sources":[
+      "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/vi/vi_50k.txt",
+      "https://downloads.tatoeba.org/exports/per_language/vie/vie_sentences.tsv.bz2"
+    ],
+    "notes":"Vietnamese Telex/CIME rules are original project data based on established UniKey/Telex user conventions; the UniKey engine/source is not redistributed here."}
+  ],
+  "imes": []
+}

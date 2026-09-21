@@ -1,0 +1,50 @@
+name: Release Vietnamese Clink pack
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Download pinned Vietnamese sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source
+          curl -L --fail --retry 3 -o source/vi_50k.txt https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/vi/vi_50k.txt
+          curl -L --fail --retry 3 -o source/vie_sentences.tsv.bz2 https://downloads.tatoeba.org/exports/per_language/vie/vie_sentences.tsv.bz2
+          bunzip2 -f source/vie_sentences.tsv.bz2
+          python3 - <<'PY'
+          import hashlib,pathlib
+          for p in [pathlib.Path("source/vi_50k.txt"),pathlib.Path("source/vie_sentences.tsv")]:
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              print(f"{p}: sha256={h} bytes={p.stat().st_size}")
+          PY
+      - name: Build and test
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf Lexicons release
+          python3 build-pack.py vi source/vi_50k.txt
+          python3 tools/build-next-word.py vi source/vi_50k.txt source/vie_sentences.tsv
+          python3 tools/build-telex-cime.py vi source/vi_50k.txt
+          python3 tools/test_telex_rules.py
+          python3 tools/validate-pack.py vi
+      - name: Build release manifest
+        run: |
+          python3 tools/build-release-manifest.py v1.0.0 zfds8nz4vs-boop/vietnamese-clink-fix release
+          cp README.md NOTICE.md LICENSE.md RELEASE-NOTES.md release/
+          cp release/manifest.json release/assets/manifest.json
+      - name: Publish first release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create v1.0.0 release/assets/* release/README.md release/NOTICE.md release/LICENSE.md release/RELEASE-NOTES.md             --repo zfds8nz4vs-boop/vietnamese-clink-fix             --title "Vietnamese Clink Fix v1.0.0"             --notes-file RELEASE-NOTES.md
