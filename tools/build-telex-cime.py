@@ -17,7 +17,7 @@ def telex_char(ch):
     if ch=="đ": return "dd",None
     if ch=="Đ": return "DD",None
     d=unicodedata.normalize("NFD",ch); base=d[0]; marks=set(d[1:]); lower=base.lower()
-    if "\u0302" in marks: shape=SHAPE[lower]
+    if "\u0302" in marks: shape=SHAPE.get(lower, base)
     elif "\u0306" in marks: shape="aw"
     elif "\u031b" in marks: shape="ow" if lower=="o" else "uw"
     else: shape=base
