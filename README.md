@@ -43,7 +43,7 @@ python3 tools/build-next-word.py vi source/vi_50k.txt source/vie_sentences.tsv
 python3 tools/build-telex-cime.py vi source/vi_50k.txt
 python3 tools/test_telex_rules.py
 python3 tools/validate-pack.py vi
-python3 tools/build-release-manifest.py v1.0.0 zfds8nz4vs-boop/vietnamese-clink-fix release
+python3 tools/build-release-manifest.py v1.0.1 zfds8nz4vs-boop/vietnamese-clink-fix release
 ```
 
 The raw downloaded inputs are build inputs, not release assets.
